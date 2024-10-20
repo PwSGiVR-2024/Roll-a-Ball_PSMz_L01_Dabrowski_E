@@ -7,6 +7,7 @@ public class MovementController : MonoBehaviour
     public int Score;
     public float moveSpeed = 1;   // Speed of the ball movement
     private Rigidbody rb;
+    Vector3 movement = Vector3.zero; // Initialize movement vector
 
     // Start is called before the first frame update
     void Start()
@@ -14,15 +15,24 @@ public class MovementController : MonoBehaviour
         rb = GetComponent<Rigidbody>();  // Get the Rigidbody component attached to the ball
     }
 
-    // Update is callmoed once per frame
     void Update()
     {
         MoveBall();
     }
 
+    void FixedUpdate()
+    {
+        // Set the velocity directly to achieve constant speed
+        //rb.linearVelocity = movement * moveSpeed;
+        rb.AddForce(movement * moveSpeed);
+    }
+
+
+
     void MoveBall()
     {
-        Vector3 movement = Vector3.zero; // Initialize movement vector
+
+        movement = Vector3.zero;
 
         // Check for input keys and set movement direction
         if (Input.GetKey(KeyCode.W))
@@ -51,10 +61,9 @@ public class MovementController : MonoBehaviour
             movement.Normalize(); // Normalize to keep speed constant regardless of direction
         }
 
-        // Set the velocity directly to achieve constant speed
-        //rb.linearVelocity = movement * moveSpeed;
+        
 
-        rb.AddForce(movement*moveSpeed);
+        
     }
 
 
