@@ -4,7 +4,7 @@ public class MovementController : MonoBehaviour
 {
 
 
-
+    public int Score;
     public float moveSpeed = 1;   // Speed of the ball movement
     private Rigidbody rb;
 
@@ -14,17 +14,17 @@ public class MovementController : MonoBehaviour
         rb = GetComponent<Rigidbody>();  // Get the Rigidbody component attached to the ball
     }
 
-    // Update is called once per frame
+    // Update is callmoed once per frame
     void Update()
     {
         MoveBall();
     }
 
-    // Function to handle ball movement
     void MoveBall()
     {
         Vector3 movement = Vector3.zero; // Initialize movement vector
 
+        // Check for input keys and set movement direction
         if (Input.GetKey(KeyCode.W))
         {
             movement += Vector3.forward;
@@ -45,10 +45,17 @@ public class MovementController : MonoBehaviour
             movement += Vector3.right;   // Move in the positive X direction
         }
 
-        // Apply force to the ball using the calculated movement vector
-        rb.AddForce(movement * moveSpeed);
+        // Normalize the movement vector to ensure consistent speed
+        if (movement != Vector3.zero)
+        {
+            movement.Normalize(); // Normalize to keep speed constant regardless of direction
+        }
 
-      
+        // Set the velocity directly to achieve constant speed
+        //rb.linearVelocity = movement * moveSpeed;
+
+        rb.AddForce(movement*moveSpeed);
     }
+
 
 }
