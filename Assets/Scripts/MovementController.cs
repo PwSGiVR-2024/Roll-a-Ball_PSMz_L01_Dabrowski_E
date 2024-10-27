@@ -1,9 +1,12 @@
+using System.Threading;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour
 {
 
-
+    public Text ScoreText;
     public int Score;
     public float moveSpeed = 1;   // Speed of the ball movement
     private Rigidbody rb;
@@ -12,7 +15,9 @@ public class MovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Score = 0;
         rb = GetComponent<Rigidbody>();  // Get the Rigidbody component attached to the ball
+        ScoreText.text = "Score: " + Score.ToString();
     }
 
     void Update()
@@ -27,7 +32,7 @@ public class MovementController : MonoBehaviour
         rb.AddForce(movement * moveSpeed);
     }
 
-
+    
 
     void MoveBall()
     {

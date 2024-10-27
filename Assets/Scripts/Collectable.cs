@@ -26,8 +26,9 @@ public class Collectable : MonoBehaviour
     {
         
         collision.gameObject.GetComponent<MovementController>().Score += 1;
+        collision.gameObject.GetComponent<MovementController>().ScoreText.text = "Score: " + collision.gameObject.GetComponent<MovementController>().Score;
 
-        if (collision.gameObject.GetComponent<MovementController>().Score == 7)
+        if (collision.gameObject.GetComponent<MovementController>().Score == 8)
         {
             Debug.Log("Gratuluje Zdobyles wszystkie punkty, a teraz zejdz z tej durnej gry i idz na silownie");
 
