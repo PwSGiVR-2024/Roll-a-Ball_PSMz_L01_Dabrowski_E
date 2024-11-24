@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Collectable : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Collectable : MonoBehaviour
 
     // This method is called when the collider attached to the GameObject
     // enters a collision with another collider.
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         
         collision.gameObject.GetComponent<MovementController>().Score += 1;
@@ -30,7 +31,8 @@ public class Collectable : MonoBehaviour
 
         if (collision.gameObject.GetComponent<MovementController>().Score == 8)
         {
-            Debug.Log("Gratuluje Zdobyles wszystkie punkty, a teraz zejdz z tej durnej gry i idz na silownie");
+            collision.gameObject.GetComponent<MovementController>().Score = 0;
+            SceneManager.LoadScene(2);
 
         }
         else {
